@@ -97,6 +97,16 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	}
 
 	/**
+	 * Get the pagination links view.
+	 *
+	 * @return Illuminate\View\View
+	 */
+	public function links()
+	{
+		return $this->env->getPaginationView($this);
+	}
+
+	/**
 	 * Add a query string value to the paginator.
 	 *
 	 * @param  string  $key
@@ -108,6 +118,16 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 		$this->query[$key] = $value;
 
 		return $this;
+	}
+
+	/**
+	 * Get the last page that should be available.
+	 *
+	 * @return int
+	 */
+	public function getLastPage()
+	{
+		return $this->lastPage;
 	}
 
 	/**

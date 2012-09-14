@@ -74,6 +74,18 @@ class Environment {
 	}
 
 	/**
+	 * Get the root URL for the request.
+	 *
+	 * @return string
+	 */
+	public function getRootUrl()
+	{
+		$r = $this->request;
+
+		return $r->getScheme().'://'.$r->getHttpHost().$r->getBasePath();
+	}
+
+	/**
 	 * Get the locale of the paginator.
 	 *
 	 * @return string
