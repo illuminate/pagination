@@ -47,7 +47,16 @@ class Environment {
 		$this->view = $view;
 		$this->trans = $trans;
 		$this->request = $request;
+		$this->setupPaginationEnvironment();
+	}
 
+	/**
+	 * Setup the pagination environment.
+	 *
+	 * @return void
+	 */
+	protected function setupPaginationEnvironment()
+	{
 		// We'll setup a "pagination" namespace namespace on the view environment so
 		// we can keep the pagination views in this component instead of crudding
 		// up the Laravel framework view folder with our boilerplate view file.
