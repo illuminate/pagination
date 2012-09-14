@@ -29,6 +29,20 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	protected $perPage;
 
 	/**
+	 * Get the current page for the request.
+	 *
+	 * @var int
+	 */
+	protected $currentPage;
+
+	/**
+	 * Get the last available page number.
+	 *
+	 * @return int
+	 */
+	protected $lastPage;
+
+	/**
 	 * All of the additional query string values.
 	 *
 	 * @var array
@@ -59,7 +73,9 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	{
 		$this->lastPage = ceil(count($this->items) / $this->perPage);
 
-		$this->currentPage = $this->getCurrentPage($this->lastPage);
+		$this->currentPage = $this->calculateCurrentPage($this->lastPage);
+
+		$this->addQuery('page', $this->currentPage);
 
 		return $this;
 	}
@@ -70,7 +86,7 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	 * @param  int  $lastPage
 	 * @return int
 	 */
-	protected function getCurrentPage($lastPage)
+	protected function calculateCurrentPage($lastPage)
 	{
 		$page = $this->env->getCurrentPage();
 
@@ -107,6 +123,17 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	}
 
 	/**
+	 * Get a URL for a given page number.
+	 *
+	 * @param  int     $page
+	 * @return string
+	 */
+	public function getUrl($page)
+	{
+		return $this->env->getRootUrl().'?'.http_build_query($this->query);
+	}
+
+	/**
 	 * Add a query string value to the paginator.
 	 *
 	 * @param  string  $key
@@ -118,6 +145,16 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 		$this->query[$key] = $value;
 
 		return $this;
+	}
+
+	/**
+	 * Get the current page for the request.
+	 *
+	 * @return int
+	 */
+	public function getCurrentPage()
+	{
+		return $this->currentPage;
 	}
 
 	/**

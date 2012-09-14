@@ -28,6 +28,13 @@ class Environment {
 	protected $trans;
 
 	/**
+	 * The name of the pagination view.
+	 *
+	 * @var string
+	 */
+	protected $viewName;
+
+	/**
 	 * The locale to be used by the translator.
 	 *
 	 * @var string
@@ -57,9 +64,6 @@ class Environment {
 	 */
 	protected function setupPaginationEnvironment()
 	{
-		// We'll setup a "pagination" namespace namespace on the view environment so
-		// we can keep the pagination views in this component instead of crudding
-		// up the Laravel framework view folder with our boilerplate view file.
 		$this->view->addNamespace('pagination', __DIR__.'/views');
 	}
 
@@ -75,6 +79,19 @@ class Environment {
 		$paginator = new Paginator($this, $items, $perPage);
 
 		return $paginator->setupPaginationContext();
+	}
+
+	/**
+	 * Get the pagination view.
+	 *
+	 * @param  Illuminate\Pagination\Paginator  $paginator
+	 * @return Illuminate\View\View
+	 */
+	public function getPaginationView(Paginator $paginator)
+	{
+		$data = array('environment' => $this, 'paginator' => $paginator);
+
+		return $this->view->make($this->getViewName(), $data);
 	}
 
 	/**
@@ -97,6 +114,27 @@ class Environment {
 		$r = $this->request;
 
 		return $r->getScheme().'://'.$r->getHttpHost().$r->getBasePath();
+	}
+
+	/**
+	 * Get the name of the pagination view.
+	 *
+	 * @return string
+	 */
+	public function getViewName()
+	{
+		return $this->viewName ?: 'pagination::slider';
+	}
+
+	/**
+	 * Set the name of the pagination view.
+	 *
+	 * @param  string  $viewName
+	 * @return void
+	 */
+	public function setViewName($viewName)
+	{
+		$this->viewName = $viewName;
 	}
 
 	/**
