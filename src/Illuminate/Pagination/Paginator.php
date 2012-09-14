@@ -75,8 +75,6 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 
 		$this->currentPage = $this->calculateCurrentPage($this->lastPage);
 
-		$this->addQuery('page', $this->currentPage);
-
 		return $this;
 	}
 
@@ -130,7 +128,17 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	 */
 	public function getUrl($page)
 	{
-		return $this->env->getRootUrl().'?'.http_build_query($this->query);
+		$url = $this->env->getRootUrl().'?page='.$page;
+
+		// If we have any extra query string key / value pairs that need to be added
+		// onto the URL, we will put them in query string form and then attach it
+		// to the URL. This allows for extra information like sortings storage.
+		if (count($this->query) > 0)
+		{
+			$url = $url.'&'.http_build_query($this->query);
+		}
+
+		return $url;
 	}
 
 	/**
