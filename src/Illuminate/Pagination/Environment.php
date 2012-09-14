@@ -47,6 +47,11 @@ class Environment {
 		$this->view = $view;
 		$this->trans = $trans;
 		$this->request = $request;
+
+		// We'll setup a "pagination" namespace namespace on the view environment so
+		// we can keep the pagination views in this component instead of crudding
+		// up the Laravel framework view folder with our boilerplate view file.
+		$this->view->addNamespace('pagination', __DIR__.'/views');
 	}
 
 	/**
