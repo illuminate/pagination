@@ -18,7 +18,10 @@
     "autoload": {
         "psr-0": {
             "Illuminate\\Pagination": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "minimum-stability": "dev"
 }

@@ -159,6 +159,26 @@ class Environment {
 	}
 
 	/**
+	 * Get the active request instance.
+	 *
+	 * @return Symfony\Component\HttpFoundation\Request
+	 */
+	public function getRequest()
+	{
+		return $this->request;
+	}
+
+	/**
+	 * Get the current view driver.
+	 *
+	 * @return Illuminate\View\Environment
+	 */
+	public function getViewDriver()
+	{
+		return $this->view;
+	}
+
+	/**
 	 * Set the current view driver.
 	 *
 	 * @param  Illuminate\View\Environment  $view
@@ -167,6 +187,16 @@ class Environment {
 	public function setViewDriver(ViewEnvironment $view)
 	{
 		$this->view = $view;
+	}
+
+	/**
+	 * Get the translator instance.
+	 *
+	 * @return Symfony\Component\Translation\TranslatorInterface
+	 */
+	public function getTranslator()
+	{
+		return $this->trans;
 	}
 
 }
