@@ -180,7 +180,7 @@ class BootstrapPresenter {
 	 */
 	public function getNext($text = '&raquo;')
 	{
-		if ($this->currentPage <= 1)
+		if ($this->currentPage >= $this->lastPage)
 		{
 			return '<li class="disabled"><a href="#">'.$text.'</a></li>';
 		}
