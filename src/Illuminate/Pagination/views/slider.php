@@ -2,7 +2,7 @@
 	$presenter = new Illuminate\Pagination\BootstrapPresenter($paginator);
 ?>
 
-<?php if ($last > 1): ?>
+<?php if ($paginator->getLastPage() > 1): ?>
 	<div class="pagination">
 		<ul>
 			<?php echo $presenter->render(); ?>
