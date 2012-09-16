@@ -87,7 +87,7 @@ class BootstrapPresenter {
 	}
 
 	/**
-	 * Create a pagination slider window.
+	 * Create a pagination slider link window.
 	 *
 	 * @return string
 	 */
