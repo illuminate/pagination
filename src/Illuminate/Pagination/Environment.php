@@ -169,6 +169,17 @@ class Environment {
 	}
 
 	/**
+	 * Set the active request instance.
+	 *
+	 * @param  Symfony\Component\HttpFoundation\Request  $request
+	 * @return void
+	 */
+	public function setRequest(Request $request)
+	{
+		$this->request = $request;
+	}
+
+	/**
 	 * Get the current view driver.
 	 *
 	 * @return Illuminate\View\Environment
