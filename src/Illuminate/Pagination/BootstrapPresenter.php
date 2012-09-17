@@ -7,7 +7,7 @@ class BootstrapPresenter {
 	 *
 	 * @var Illuminate\Pagination\Paginator
 	 */
-	protected $pager;
+	protected $paginator;
 
 	/**
 	 * The current page of the paginator.
@@ -31,9 +31,9 @@ class BootstrapPresenter {
 	 */
 	public function __construct(Paginator $paginator)
 	{
-		$this->pager = $paginator;
-		$this->lastPage = $this->pager->getLastPage();
-		$this->currentPage = $this->pager->getCurrentPage();
+		$this->paginator = $paginator;
+		$this->lastPage = $this->paginator->getLastPage();
+		$this->currentPage = $this->paginator->getCurrentPage();
 	}
 
 	/**
@@ -169,7 +169,7 @@ class BootstrapPresenter {
 		}
 		else
 		{
-			$url = $this->pager->getUrl($this->currentPage - 1);
+			$url = $this->paginator->getUrl($this->currentPage - 1);
 
 			return '<li class="active"><a href="'.$url.'">'.$text.'</a></li>';
 		}
@@ -192,7 +192,7 @@ class BootstrapPresenter {
 		}
 		else
 		{
-			$url = $this->pager->getUrl($this->currentPage + 1);
+			$url = $this->paginator->getUrl($this->currentPage + 1);
 
 			return '<li class="active"><a href="'.$url.'">'.$text.'</a></li>';
 		}
@@ -216,7 +216,7 @@ class BootstrapPresenter {
 	 */
 	protected function getLink($page)
 	{
-		$url = $this->pager->getUrl($page);
+		$url = $this->paginator->getUrl($page);
 
 		return '<li class="active"><a href="'.$url.'">'.$page.'</a></li>';
 	}
