@@ -221,4 +221,15 @@ class BootstrapPresenter {
 		return '<li class="active"><a href="'.$url.'">'.$page.'</a></li>';
 	}
 
+	/**
+	 * Set the value of the current page.
+	 *
+	 * @param  int   $page
+	 * @return void
+	 */
+	public function setCurrentPage($page)
+	{
+		$this->currentPage = $page;
+	}
+
 }
