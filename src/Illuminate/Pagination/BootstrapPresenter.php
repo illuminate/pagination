@@ -64,7 +64,7 @@ class BootstrapPresenter {
 	 * @param  int  $start
 	 * @param  int  $end
 	 */
-	protected function getPageRange($start, $end)
+	public function getPageRange($start, $end)
 	{
 		$pages = array();
 
@@ -110,7 +110,7 @@ class BootstrapPresenter {
 		// since we're too close to the end of the list to create a full on slider.
 		elseif ($this->currentPage >= $this->lastPage - $window)
 		{
-			$start = $this->lastPage - $window - 2;
+			$start = $this->lastPage - 8;
 
 			$content = $this->getPageRange($start, $this->lastPage);
 
@@ -122,12 +122,22 @@ class BootstrapPresenter {
 		// of pages in the middle providing a Google style sliding paginator setup.
 		else
 		{
-			$start = $this->currentPage - 3;
-
-			$content = $this->getPageRange($start, $this->currentPage + 3);
+			$content = $this->getAdjacentRange();
 
 			return $this->getStart().$content.$this->getFinish();
 		}
+	}
+
+	/**
+	 * Get the page range for the current page window.
+	 *
+	 * @return string
+	 */
+	public function getAdjacentRange()
+	{
+		$start = $this->currentPage - 3;
+
+		return $this->getPageRange($start, $this->currentPage + 3);
 	}
 
 	/**
@@ -135,7 +145,7 @@ class BootstrapPresenter {
 	 *
 	 * @return string
 	 */
-	protected function getStart()
+	public function getStart()
 	{
 		return $this->getPageRange(1, 2).$this->getDots();
 	}
@@ -145,7 +155,7 @@ class BootstrapPresenter {
 	 *
 	 * @return string
 	 */
-	protected function getFinish()
+	public function getFinish()
 	{
 		$content = $this->getPageRange($this->lastPage - 1, $this->lastPage);
 
@@ -203,7 +213,7 @@ class BootstrapPresenter {
 	 *
 	 * @return string
 	 */
-	protected function getDots()
+	public function getDots()
 	{
 		return '<li class="disabled"><a href="#">...</a></li>';
 	}
@@ -214,7 +224,7 @@ class BootstrapPresenter {
 	 * @param  mixed   $page
 	 * @return string
 	 */
-	protected function getLink($page)
+	public function getLink($page)
 	{
 		$url = $this->paginator->getUrl($page);
 
@@ -230,6 +240,17 @@ class BootstrapPresenter {
 	public function setCurrentPage($page)
 	{
 		$this->currentPage = $page;
+	}
+
+	/**
+	 * Set the value of the last page.
+	 *
+	 * @param  int   $page
+	 * @return void
+	 */
+	public function setLastPage($page)
+	{
+		$this->lastPage = $page;
 	}
 
 }
