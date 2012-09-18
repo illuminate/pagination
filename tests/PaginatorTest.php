@@ -13,7 +13,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPaginationContextIsSetupCorrectly()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 		$env->shouldReceive('getCurrentPage')->once()->andReturn(1);
 		$p->setupPaginationContext();
 
@@ -24,7 +24,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPaginationContextHandlesHugeCurrentPage()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 		$env->shouldReceive('getCurrentPage')->once()->andReturn(15);
 		$p->setupPaginationContext();
 
@@ -35,7 +35,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPaginationContextHandlesPageLessThanOne()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 		$env->shouldReceive('getCurrentPage')->once()->andReturn(-1);
 		$p->setupPaginationContext();
 
@@ -46,7 +46,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPaginationContextHandlesPageInvalidFormat()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 		$env->shouldReceive('getCurrentPage')->once()->andReturn('abc');
 		$p->setupPaginationContext();
 
@@ -57,7 +57,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPaginationContextHandlesPageMissing()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 		$env->shouldReceive('getCurrentPage')->once()->andReturn(null);
 		$p->setupPaginationContext();
 
@@ -68,7 +68,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetLinksCallsEnvironmentProperly()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 		$env->shouldReceive('getPaginationView')->once()->with($p)->andReturn('foo');
 
 		$this->assertEquals('foo', $p->links());
@@ -77,7 +77,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetUrlProperlyFormatsUrl()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 		$env->shouldReceive('getRootUrl')->andReturn('http://foo.com');
 
 		$this->assertEquals('http://foo.com?page=1', $p->getUrl(1));
@@ -88,7 +88,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPaginatorIsCountable()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 
 		$this->assertEquals(3, count($p));
 	}
@@ -96,7 +96,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPaginatorIsIterable()
 	{
-		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 2);
+		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
 
 		$this->assertInstanceOf('ArrayIterator', $p->getIterator());
 		$this->assertEquals(array('foo', 'bar', 'baz'), $p->getIterator()->getArrayCopy());

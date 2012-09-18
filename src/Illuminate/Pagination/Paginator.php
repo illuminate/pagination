@@ -22,6 +22,13 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	protected $items;
 
 	/**
+	 * The total number of items.
+	 *
+	 * @var int
+	 */
+	protected $total;
+
+	/**
 	 * The amount of items to show per page.
 	 *
 	 * @var int
@@ -54,12 +61,14 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	 *
 	 * @param  Illuminate\Pagination\Environment  $env
 	 * @param  array  $items
+	 * @param  int    $total
 	 * @param  int    $perPage
 	 * @return void
 	 */
-	public function __construct(Environment $env, array $items, $perPage)
+	public function __construct(Environment $env, array $items, $total, $perPage)
 	{
 		$this->env = $env;
+		$this->total = $total;
 		$this->items = $items;
 		$this->perPage = $perPage;
 	}
@@ -71,7 +80,7 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	 */
 	public function setupPaginationContext()
 	{
-		$this->lastPage = ceil(count($this->items) / $this->perPage);
+		$this->lastPage = ceil($this->total / $this->perPage);
 
 		$this->currentPage = $this->calculateCurrentPage($this->lastPage);
 
@@ -183,6 +192,16 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	public function getItems()
 	{
 		return $this->items;
+	}
+
+	/**
+	 * Get the total number of pages.
+	 *
+	 * @return int
+	 */
+	public function getTotal()
+	{
+		return $this->total;
 	}
 
 	/**

@@ -23,7 +23,7 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase {
 		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com', 'GET');
 		$env->setRequest($request);
 		
-		$this->assertInstanceOf('Illuminate\Pagination\Paginator', $env->make(array('foo', 'bar'), 2));
+		$this->assertInstanceOf('Illuminate\Pagination\Paginator', $env->make(array('foo', 'bar'), 2, 2));
 	}
 
 

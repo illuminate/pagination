@@ -72,11 +72,12 @@ class Environment {
 	 *
 	 * @param  array  $items
 	 * @param  int    $perPage
+	 * @param  int    $total
 	 * @return Illuminate\Pagination\Paginator
 	 */
-	public function make(array $items, $perPage)
+	public function make(array $items, $total, $perPage)
 	{
-		$paginator = new Paginator($this, $items, $perPage);
+		$paginator = new Paginator($this, $items, $total, $perPage);
 
 		return $paginator->setupPaginationContext();
 	}
