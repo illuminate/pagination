@@ -114,7 +114,12 @@ class Environment {
 	{
 		$r = $this->request;
 
-		return $r->getScheme().'://'.$r->getHttpHost().$r->getBasePath();
+		if (strpos($pathInfo = $r->getPathInfo(), '?') === 0)
+		{
+			$pathInfo = '';
+		}
+
+		return $r->getScheme().'://'.$r->getHttpHost().$r->getBasePath().$pathInfo;
 	}
 
 	/**

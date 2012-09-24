@@ -50,6 +50,12 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase {
 	public function testRootUrlCanBeRetrieved()
 	{
 		$env = $this->getEnvironment();
+		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com/bar?page=2', 'GET');
+		$env->setRequest($request);
+
+		$this->assertEquals('http://foo.com/bar', $env->getRootUrl());
+
+		$env = $this->getEnvironment();
 		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com?page=2', 'GET');
 		$env->setRequest($request);
 
