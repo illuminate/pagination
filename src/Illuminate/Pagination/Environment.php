@@ -119,7 +119,7 @@ class Environment {
 			$pathInfo = '';
 		}
 
-		return $r->getScheme().'://'.$r->getHttpHost().$r->getBasePath().$pathInfo;
+		return $r->getSchemeAndHttpHost().$r->getBaseUrl().$pathInfo;
 	}
 
 	/**
