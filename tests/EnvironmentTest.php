@@ -47,19 +47,19 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	public function testRootUrlCanBeRetrieved()
+	public function testCurrentUrlCanBeRetrieved()
 	{
 		$env = $this->getEnvironment();
 		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com/bar?page=2', 'GET');
 		$env->setRequest($request);
 
-		$this->assertEquals('http://foo.com/bar', $env->getRootUrl());
+		$this->assertEquals('http://foo.com/bar', $env->getCurrentUrl());
 
 		$env = $this->getEnvironment();
 		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com?page=2', 'GET');
 		$env->setRequest($request);
 
-		$this->assertEquals('http://foo.com', $env->getRootUrl());		
+		$this->assertEquals('http://foo.com', $env->getCurrentUrl());		
 	}
 
 

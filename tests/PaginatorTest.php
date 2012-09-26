@@ -78,7 +78,7 @@ class PaginatorTest extends PHPUnit_Framework_TestCase {
 	public function testGetUrlProperlyFormatsUrl()
 	{
 		$p = new Paginator($env = m::mock('Illuminate\Pagination\Environment'), array('foo', 'bar', 'baz'), 3, 2);
-		$env->shouldReceive('getRootUrl')->andReturn('http://foo.com');
+		$env->shouldReceive('getCurrentUrl')->andReturn('http://foo.com');
 
 		$this->assertEquals('http://foo.com?page=1', $p->getUrl(1));
 		$p->addQuery('foo', 'bar');

@@ -110,7 +110,7 @@ class Environment {
 	 *
 	 * @return string
 	 */
-	public function getRootUrl()
+	public function getCurrentUrl()
 	{
 		$r = $this->request;
 

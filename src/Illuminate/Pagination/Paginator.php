@@ -137,7 +137,7 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	 */
 	public function getUrl($page)
 	{
-		$url = $this->env->getRootUrl().'?page='.$page;
+		$url = $this->env->getCurrentUrl().'?page='.$page;
 
 		// If we have any extra query string key / value pairs that need to be added
 		// onto the URL, we will put them in query string form and then attach it
