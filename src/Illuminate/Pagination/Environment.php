@@ -1,6 +1,6 @@
 <?php namespace Illuminate\Pagination;
 
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 use Illuminate\View\Environment as ViewEnvironment;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -112,14 +112,7 @@ class Environment {
 	 */
 	public function getCurrentUrl()
 	{
-		$r = $this->request;
-
-		if (strpos($pathInfo = $r->getPathInfo(), '?') === 0)
-		{
-			$pathInfo = '';
-		}
-
-		return $r->getSchemeAndHttpHost().$r->getBaseUrl().$pathInfo;
+		return $this->request->url();
 	}
 
 	/**

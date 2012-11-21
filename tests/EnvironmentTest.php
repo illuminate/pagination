@@ -20,7 +20,7 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase {
 	public function testPaginatorCanBeCreated()
 	{
 		$env = $this->getEnvironment();
-		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com', 'GET');
+		$request = Illuminate\Http\Request::create('http://foo.com', 'GET');
 		$env->setRequest($request);
 		
 		$this->assertInstanceOf('Illuminate\Pagination\Paginator', $env->make(array('foo', 'bar'), 2, 2));
@@ -40,7 +40,7 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase {
 	public function testCurrentPageCanBeRetrieved()
 	{
 		$env = $this->getEnvironment();
-		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com?page=2', 'GET');
+		$request = Illuminate\Http\Request::create('http://foo.com?page=2', 'GET');
 		$env->setRequest($request);
 
 		$this->assertEquals(2, $env->getCurrentPage());
@@ -50,22 +50,22 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase {
 	public function testCurrentUrlCanBeRetrieved()
 	{
 		$env = $this->getEnvironment();
-		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com/bar?page=2', 'GET');
+		$request = Illuminate\Http\Request::create('http://foo.com/bar?page=2', 'GET');
 		$env->setRequest($request);
 
 		$this->assertEquals('http://foo.com/bar', $env->getCurrentUrl());
 
 		$env = $this->getEnvironment();
-		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com?page=2', 'GET');
+		$request = Illuminate\Http\Request::create('http://foo.com?page=2', 'GET');
 		$env->setRequest($request);
 
-		$this->assertEquals('http://foo.com/', $env->getCurrentUrl());		
+		$this->assertEquals('http://foo.com', $env->getCurrentUrl());		
 	}
 
 
 	protected function getEnvironment()
 	{
-		$request = m::mock('Symfony\Component\HttpFoundation\Request');
+		$request = m::mock('Illuminate\Http\Request');
 		$view = m::mock('Illuminate\View\Environment');
 		$trans = m::mock('Symfony\Component\Translation\TranslatorInterface');
 
