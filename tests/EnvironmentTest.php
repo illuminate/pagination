@@ -59,7 +59,7 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase {
 		$request = Symfony\Component\HttpFoundation\Request::create('http://foo.com?page=2', 'GET');
 		$env->setRequest($request);
 
-		$this->assertEquals('http://foo.com', $env->getCurrentUrl());		
+		$this->assertEquals('http://foo.com/', $env->getCurrentUrl());		
 	}
 
 
