@@ -33,6 +33,13 @@ class Environment {
 	 * @var string
 	 */
 	protected $viewName;
+	
+	/**
+	 * The number of the current page.
+	 * 
+	 * @var int
+	 */
+	protected $currentPage;
 
 	/**
 	 * The locale to be used by the translator.
@@ -96,13 +103,24 @@ class Environment {
 	}
 
 	/**
-	 * Get the current page from the request query.
+	 * Get the number of the current page..
 	 *
 	 * @return int
 	 */
 	public function getCurrentPage()
 	{
-		return $this->request->query->get('page', 1);
+		return $this->currentPage ?: $this->request->query->get('page', 1);
+	}
+	
+	/**
+	 * Set the number of the current page.
+	 * 
+	 * @param  int  $number
+	 * @return void
+	 */
+	public function setCurrentPage($number)
+	{
+		$this->currentPage = $number;
 	}
 
 	/**
