@@ -195,7 +195,7 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	}
 
 	/**
-	 * Get the total number of pages.
+	 * Get the total number of items in the collection.
 	 *
 	 * @return int
 	 */
@@ -215,7 +215,7 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 	}
 
 	/**
-	 * Get the count of the items being paginated.
+	 * Get the number of items for the current page.
 	 *
 	 * @return int
 	 */
