@@ -172,7 +172,7 @@ class BootstrapPresenter {
 	{
 		// If the current page is less than or equal to one, it means we can't go any
 		// further back in the pages, so we will render a disabled previous button
-		// when that is the case. Otherwise, we will give it an active "status".
+		// when that is the case.
 		if ($this->currentPage <= 1)
 		{
 			return '<li class="disabled"><a href="#">'.$text.'</a></li>';
@@ -181,7 +181,7 @@ class BootstrapPresenter {
 		{
 			$url = $this->paginator->getUrl($this->currentPage - 1);
 
-			return '<li class="active"><a href="'.$url.'">'.$text.'</a></li>';
+			return '<li><a href="'.$url.'">'.$text.'</a></li>';
 		}
 	}
 
@@ -204,7 +204,7 @@ class BootstrapPresenter {
 		{
 			$url = $this->paginator->getUrl($this->currentPage + 1);
 
-			return '<li class="active"><a href="'.$url.'">'.$text.'</a></li>';
+			return '<li><a href="'.$url.'">'.$text.'</a></li>';
 		}
 	}
 
