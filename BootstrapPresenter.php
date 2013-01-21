@@ -70,12 +70,12 @@ class BootstrapPresenter {
 
 		for ($page = $start; $page <= $end; $page++)
 		{
-			// If the current page is equal to the page we're iterating on, we will create a
-			// disabled link for that page. Otherwise, we can create a typical active one
-			// for the link. These views use the "Twitter Bootstrap" styles by default.
+			// If the current page is equal to the page we're iterating on, we will give it
+			// an active link for that page. Otherwise, we'll create a typical link. These 
+			// views use the "Twitter Bootstrap" styles by default.
 			if ($this->currentPage == $page)
 			{
-				$pages[] = '<li class="disabled"><a href="#">'.$page.'</a></li>';
+				$pages[] = '<li class="active"><a href="#">'.$page.'</a></li>';
 			}
 			else
 			{
@@ -228,7 +228,7 @@ class BootstrapPresenter {
 	{
 		$url = $this->paginator->getUrl($page);
 
-		return '<li class="active"><a href="'.$url.'">'.$page.'</a></li>';
+		return '<li><a href="'.$url.'">'.$page.'</a></li>';
 	}
 
 	/**
