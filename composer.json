@@ -1,19 +1,21 @@
 {
-    "name": "illuminate/pagination",
+    "name": "whsuite/pagination",
+    "description": "Fork of illuminate/pagination for WHSuite",
     "license": "MIT",
     "authors": [
         {
             "name": "Taylor Otwell",
             "email": "taylorotwell@gmail.com"
+        },
+        {
+            "name": "WHSuite",
+            "email": "info@whsuite.com"
         }
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/http": "4.0.x",
-        "illuminate/support": "4.0.x",
-        "illuminate/view": "4.0.x",
-        "symfony/http-foundation": "2.3.*",
-        "symfony/translation": "2.3.*"
+        "symfony/http-foundation": "2.4.*",
+        "symfony/translation": "2.4.*"
     },
     "require-dev": {
         "mockery/mockery": "0.7.2",
@@ -27,7 +29,7 @@
     "target-dir": "Illuminate/Pagination",
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0-dev"
+            "dev-master": "4.1-dev"
         }
     },
     "minimum-stability": "dev"
