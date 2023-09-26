@@ -68,6 +68,13 @@ abstract class AbstractPaginator implements Htmlable, Stringable
     protected $pageName = 'page';
 
     /**
+     * The query string variable used to store the per page.
+     *
+     * @var string
+     */
+    protected $perPageName = 'per_page';
+
+    /**
      * The number of links to display on each side of current page link.
      *
      * @var int
@@ -94,6 +101,13 @@ abstract class AbstractPaginator implements Htmlable, Stringable
      * @var \Closure
      */
     protected static $currentPageResolver;
+
+    /**
+     * The per page resolver callback.
+     *
+     * @var \Closure
+     */
+    protected static $perPageResolver;
 
     /**
      * The query string resolver callback.
@@ -132,6 +146,17 @@ abstract class AbstractPaginator implements Htmlable, Stringable
     protected function isValidPageNumber($page)
     {
         return $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false;
+    }
+
+    /**
+     * Determine if the given value is a valid per page number.
+     *
+     * @param  int  $perPage
+     * @return bool
+     */
+    protected function isValidPerPageNumber($perPage)
+    {
+        return $perPage > 0 && filter_var($perPage, FILTER_VALIDATE_INT) !== false;
     }
 
     /**
@@ -521,6 +546,33 @@ abstract class AbstractPaginator implements Htmlable, Stringable
     public static function currentPageResolver(Closure $resolver)
     {
         static::$currentPageResolver = $resolver;
+    }
+
+    /**
+     * Resolve the per page or return the default value.
+     *
+     * @param  string  $perPageName
+     * @param  int  $default
+     * @return int
+     */
+    public static function resolvePerPage($perPageName = 'per_page', $default = 15)
+    {
+        if (isset(static::$perPageResolver)) {
+            return (int) call_user_func(static::$perPageResolver, $perPageName);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Set the per page resolver callback.
+     *
+     * @param  \Closure  $resolver
+     * @return void
+     */
+    public static function perPageResolver(Closure $resolver)
+    {
+        static::$perPageResolver = $resolver;
     }
 
     /**
